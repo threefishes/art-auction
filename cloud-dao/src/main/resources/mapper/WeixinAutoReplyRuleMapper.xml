@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.threefishes.cloudrepository.dao.WeixinAutoReplyRuleMapper">
+  <resultMap id="BaseResultMap" type="cn.threefishes.cloudrepository.entity.WeixinAutoReplyRule">
+    <id column="rule_id" jdbcType="INTEGER" property="ruleId" />
+    <result column="all_keyword" jdbcType="VARCHAR" property="allKeyword" />
+    <result column="reply_all" jdbcType="INTEGER" property="replyAll" />
+    <result column="reply_count" jdbcType="INTEGER" property="replyCount" />
+    <result column="reply_type_count" jdbcType="VARCHAR" property="replyTypeCount" />
+    <result column="rule_name" jdbcType="VARCHAR" property="ruleName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    rule_id, all_keyword, reply_all, reply_count, reply_type_count, rule_name
+  </sql>
+  <select id="selectByExample" parameterType="cn.threefishes.cloudrepository.entity.WeixinAutoReplyRuleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from weixin_auto_reply_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from weixin_auto_reply_rule
+    where rule_id = #{ruleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from weixin_auto_reply_rule
+    where rule_id = #{ruleId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.threefishes.cloudrepository.entity.WeixinAutoReplyRuleExample">
+    delete from weixin_auto_reply_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="rule_id" keyProperty="ruleId" parameterType="cn.threefishes.cloudrepository.entity.WeixinAutoReplyRule" useGeneratedKeys="true">
+    insert into weixin_auto_reply_rule (all_keyword, reply_all, reply_count, 
+      reply_type_count, rule_name)
+    values (#{allKeyword,jdbcType=VARCHAR}, #{replyAll,jdbcType=INTEGER}, #{replyCount,jdbcType=INTEGER}, 
+      #{replyTypeCount,jdbcType=VARCHAR}, #{ruleName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="rule_id" keyProperty="ruleId" parameterType="cn.threefishes.cloudrepository.entity.WeixinAutoReplyRule" useGeneratedKeys="true">
+    insert into weixin_auto_reply_rule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="allKeyword != null">
+        all_keyword,
+      </if>
+      <if test="replyAll != null">
+        reply_all,
+      </if>
+      <if test="replyCount != null">
+        reply_count,
+      </if>
+      <if test="replyTypeCount != null">
+        reply_type_count,
+      </if>
+      <if test="ruleName != null">
+        rule_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="allKeyword != null">
+        #{allKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="replyAll != null">
+        #{replyAll,jdbcType=INTEGER},
+      </if>
+      <if test="replyCount != null">
+        #{replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="replyTypeCount != null">
+        #{replyTypeCount,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleName != null">
+        #{ruleName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.threefishes.cloudrepository.entity.WeixinAutoReplyRuleExample" resultType="java.lang.Long">
+    select count(*) from weixin_auto_reply_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update weixin_auto_reply_rule
+    <set>
+      <if test="record.ruleId != null">
+        rule_id = #{record.ruleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.allKeyword != null">
+        all_keyword = #{record.allKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyAll != null">
+        reply_all = #{record.replyAll,jdbcType=INTEGER},
+      </if>
+      <if test="record.replyCount != null">
+        reply_count = #{record.replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.replyTypeCount != null">
+        reply_type_count = #{record.replyTypeCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleName != null">
+        rule_name = #{record.ruleName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update weixin_auto_reply_rule
+    set rule_id = #{record.ruleId,jdbcType=INTEGER},
+      all_keyword = #{record.allKeyword,jdbcType=VARCHAR},
+      reply_all = #{record.replyAll,jdbcType=INTEGER},
+      reply_count = #{record.replyCount,jdbcType=INTEGER},
+      reply_type_count = #{record.replyTypeCount,jdbcType=VARCHAR},
+      rule_name = #{record.ruleName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.threefishes.cloudrepository.entity.WeixinAutoReplyRule">
+    update weixin_auto_reply_rule
+    <set>
+      <if test="allKeyword != null">
+        all_keyword = #{allKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="replyAll != null">
+        reply_all = #{replyAll,jdbcType=INTEGER},
+      </if>
+      <if test="replyCount != null">
+        reply_count = #{replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="replyTypeCount != null">
+        reply_type_count = #{replyTypeCount,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleName != null">
+        rule_name = #{ruleName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rule_id = #{ruleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.threefishes.cloudrepository.entity.WeixinAutoReplyRule">
+    update weixin_auto_reply_rule
+    set all_keyword = #{allKeyword,jdbcType=VARCHAR},
+      reply_all = #{replyAll,jdbcType=INTEGER},
+      reply_count = #{replyCount,jdbcType=INTEGER},
+      reply_type_count = #{replyTypeCount,jdbcType=VARCHAR},
+      rule_name = #{ruleName,jdbcType=VARCHAR}
+    where rule_id = #{ruleId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.threefishes.cloudrepository.entity.WeixinAutoReplyRuleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from weixin_auto_reply_rule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

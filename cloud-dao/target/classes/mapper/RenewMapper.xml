@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.threefishes.cloudrepository.dao.RenewMapper">
+  <resultMap id="BaseResultMap" type="cn.threefishes.cloudrepository.entity.Renew">
+    <id column="renew_id" jdbcType="INTEGER" property="renewId" />
+    <result column="allow_foreign_goods" jdbcType="INTEGER" property="allowForeignGoods" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="grade_id" jdbcType="INTEGER" property="gradeId" />
+    <result column="grade_name" jdbcType="VARCHAR" property="gradeName" />
+    <result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
+    <result column="pay_cert" jdbcType="VARCHAR" property="payCert" />
+    <result column="pay_cert_note" jdbcType="VARCHAR" property="payCertNote" />
+    <result column="renew_price" jdbcType="DECIMAL" property="renewPrice" />
+    <result column="renew_state" jdbcType="INTEGER" property="renewState" />
+    <result column="renew_year" jdbcType="INTEGER" property="renewYear" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="store_name" jdbcType="VARCHAR" property="storeName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    renew_id, allow_foreign_goods, create_time, end_time, grade_id, grade_name, pay_amount, 
+    pay_cert, pay_cert_note, renew_price, renew_state, renew_year, start_time, store_id, 
+    store_name
+  </sql>
+  <select id="selectByExample" parameterType="cn.threefishes.cloudrepository.entity.RenewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from renew
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from renew
+    where renew_id = #{renewId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from renew
+    where renew_id = #{renewId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.threefishes.cloudrepository.entity.RenewExample">
+    delete from renew
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="renew_id" keyProperty="renewId" parameterType="cn.threefishes.cloudrepository.entity.Renew" useGeneratedKeys="true">
+    insert into renew (allow_foreign_goods, create_time, 
+      end_time, grade_id, grade_name, 
+      pay_amount, pay_cert, pay_cert_note, 
+      renew_price, renew_state, renew_year, 
+      start_time, store_id, store_name
+      )
+    values (#{allowForeignGoods,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{gradeId,jdbcType=INTEGER}, #{gradeName,jdbcType=VARCHAR}, 
+      #{payAmount,jdbcType=DECIMAL}, #{payCert,jdbcType=VARCHAR}, #{payCertNote,jdbcType=VARCHAR}, 
+      #{renewPrice,jdbcType=DECIMAL}, #{renewState,jdbcType=INTEGER}, #{renewYear,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="renew_id" keyProperty="renewId" parameterType="cn.threefishes.cloudrepository.entity.Renew" useGeneratedKeys="true">
+    insert into renew
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="allowForeignGoods != null">
+        allow_foreign_goods,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="gradeId != null">
+        grade_id,
+      </if>
+      <if test="gradeName != null">
+        grade_name,
+      </if>
+      <if test="payAmount != null">
+        pay_amount,
+      </if>
+      <if test="payCert != null">
+        pay_cert,
+      </if>
+      <if test="payCertNote != null">
+        pay_cert_note,
+      </if>
+      <if test="renewPrice != null">
+        renew_price,
+      </if>
+      <if test="renewState != null">
+        renew_state,
+      </if>
+      <if test="renewYear != null">
+        renew_year,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="storeName != null">
+        store_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="allowForeignGoods != null">
+        #{allowForeignGoods,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gradeId != null">
+        #{gradeId,jdbcType=INTEGER},
+      </if>
+      <if test="gradeName != null">
+        #{gradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmount != null">
+        #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payCert != null">
+        #{payCert,jdbcType=VARCHAR},
+      </if>
+      <if test="payCertNote != null">
+        #{payCertNote,jdbcType=VARCHAR},
+      </if>
+      <if test="renewPrice != null">
+        #{renewPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="renewState != null">
+        #{renewState,jdbcType=INTEGER},
+      </if>
+      <if test="renewYear != null">
+        #{renewYear,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.threefishes.cloudrepository.entity.RenewExample" resultType="java.lang.Long">
+    select count(*) from renew
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update renew
+    <set>
+      <if test="record.renewId != null">
+        renew_id = #{record.renewId,jdbcType=INTEGER},
+      </if>
+      <if test="record.allowForeignGoods != null">
+        allow_foreign_goods = #{record.allowForeignGoods,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gradeId != null">
+        grade_id = #{record.gradeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.gradeName != null">
+        grade_name = #{record.gradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payAmount != null">
+        pay_amount = #{record.payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payCert != null">
+        pay_cert = #{record.payCert,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payCertNote != null">
+        pay_cert_note = #{record.payCertNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.renewPrice != null">
+        renew_price = #{record.renewPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.renewState != null">
+        renew_state = #{record.renewState,jdbcType=INTEGER},
+      </if>
+      <if test="record.renewYear != null">
+        renew_year = #{record.renewYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.storeId != null">
+        store_id = #{record.storeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.storeName != null">
+        store_name = #{record.storeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update renew
+    set renew_id = #{record.renewId,jdbcType=INTEGER},
+      allow_foreign_goods = #{record.allowForeignGoods,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      grade_id = #{record.gradeId,jdbcType=INTEGER},
+      grade_name = #{record.gradeName,jdbcType=VARCHAR},
+      pay_amount = #{record.payAmount,jdbcType=DECIMAL},
+      pay_cert = #{record.payCert,jdbcType=VARCHAR},
+      pay_cert_note = #{record.payCertNote,jdbcType=VARCHAR},
+      renew_price = #{record.renewPrice,jdbcType=DECIMAL},
+      renew_state = #{record.renewState,jdbcType=INTEGER},
+      renew_year = #{record.renewYear,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      store_id = #{record.storeId,jdbcType=INTEGER},
+      store_name = #{record.storeName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.threefishes.cloudrepository.entity.Renew">
+    update renew
+    <set>
+      <if test="allowForeignGoods != null">
+        allow_foreign_goods = #{allowForeignGoods,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gradeId != null">
+        grade_id = #{gradeId,jdbcType=INTEGER},
+      </if>
+      <if test="gradeName != null">
+        grade_name = #{gradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmount != null">
+        pay_amount = #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payCert != null">
+        pay_cert = #{payCert,jdbcType=VARCHAR},
+      </if>
+      <if test="payCertNote != null">
+        pay_cert_note = #{payCertNote,jdbcType=VARCHAR},
+      </if>
+      <if test="renewPrice != null">
+        renew_price = #{renewPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="renewState != null">
+        renew_state = #{renewState,jdbcType=INTEGER},
+      </if>
+      <if test="renewYear != null">
+        renew_year = #{renewYear,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="storeName != null">
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where renew_id = #{renewId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.threefishes.cloudrepository.entity.Renew">
+    update renew
+    set allow_foreign_goods = #{allowForeignGoods,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      grade_id = #{gradeId,jdbcType=INTEGER},
+      grade_name = #{gradeName,jdbcType=VARCHAR},
+      pay_amount = #{payAmount,jdbcType=DECIMAL},
+      pay_cert = #{payCert,jdbcType=VARCHAR},
+      pay_cert_note = #{payCertNote,jdbcType=VARCHAR},
+      renew_price = #{renewPrice,jdbcType=DECIMAL},
+      renew_state = #{renewState,jdbcType=INTEGER},
+      renew_year = #{renewYear,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      store_id = #{storeId,jdbcType=INTEGER},
+      store_name = #{storeName,jdbcType=VARCHAR}
+    where renew_id = #{renewId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.threefishes.cloudrepository.entity.RenewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from renew
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

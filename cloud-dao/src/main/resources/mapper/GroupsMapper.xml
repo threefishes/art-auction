@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.threefishes.cloudrepository.dao.GroupsMapper">
+  <resultMap id="BaseResultMap" type="cn.threefishes.cloudrepository.entity.Groups">
+    <id column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="buy_limit_num" jdbcType="INTEGER" property="buyLimitNum" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="group_explain" jdbcType="VARCHAR" property="groupExplain" />
+    <result column="group_game_rule" jdbcType="VARCHAR" property="groupGameRule" />
+    <result column="group_joined_num" jdbcType="INTEGER" property="groupJoinedNum" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="group_open_virtual" jdbcType="INTEGER" property="groupOpenVirtual" />
+    <result column="group_require_num" jdbcType="INTEGER" property="groupRequireNum" />
+    <result column="group_state" jdbcType="INTEGER" property="groupState" />
+    <result column="group_title" jdbcType="VARCHAR" property="groupTitle" />
+    <result column="group_virtual_time" jdbcType="TIMESTAMP" property="groupVirtualTime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    group_id, buy_limit_num, end_time, group_explain, group_game_rule, group_joined_num, 
+    group_name, group_open_virtual, group_require_num, group_state, group_title, group_virtual_time, 
+    start_time, store_id
+  </sql>
+  <select id="selectByExample" parameterType="cn.threefishes.cloudrepository.entity.GroupsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from groups
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from groups
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from groups
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.threefishes.cloudrepository.entity.GroupsExample">
+    delete from groups
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="group_id" keyProperty="groupId" parameterType="cn.threefishes.cloudrepository.entity.Groups" useGeneratedKeys="true">
+    insert into groups (buy_limit_num, end_time, group_explain, 
+      group_game_rule, group_joined_num, group_name, 
+      group_open_virtual, group_require_num, group_state, 
+      group_title, group_virtual_time, start_time, 
+      store_id)
+    values (#{buyLimitNum,jdbcType=INTEGER}, #{endTime,jdbcType=TIMESTAMP}, #{groupExplain,jdbcType=VARCHAR}, 
+      #{groupGameRule,jdbcType=VARCHAR}, #{groupJoinedNum,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, 
+      #{groupOpenVirtual,jdbcType=INTEGER}, #{groupRequireNum,jdbcType=INTEGER}, #{groupState,jdbcType=INTEGER}, 
+      #{groupTitle,jdbcType=VARCHAR}, #{groupVirtualTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{storeId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="group_id" keyProperty="groupId" parameterType="cn.threefishes.cloudrepository.entity.Groups" useGeneratedKeys="true">
+    insert into groups
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="buyLimitNum != null">
+        buy_limit_num,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="groupExplain != null">
+        group_explain,
+      </if>
+      <if test="groupGameRule != null">
+        group_game_rule,
+      </if>
+      <if test="groupJoinedNum != null">
+        group_joined_num,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="groupOpenVirtual != null">
+        group_open_virtual,
+      </if>
+      <if test="groupRequireNum != null">
+        group_require_num,
+      </if>
+      <if test="groupState != null">
+        group_state,
+      </if>
+      <if test="groupTitle != null">
+        group_title,
+      </if>
+      <if test="groupVirtualTime != null">
+        group_virtual_time,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="buyLimitNum != null">
+        #{buyLimitNum,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="groupExplain != null">
+        #{groupExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="groupGameRule != null">
+        #{groupGameRule,jdbcType=VARCHAR},
+      </if>
+      <if test="groupJoinedNum != null">
+        #{groupJoinedNum,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupOpenVirtual != null">
+        #{groupOpenVirtual,jdbcType=INTEGER},
+      </if>
+      <if test="groupRequireNum != null">
+        #{groupRequireNum,jdbcType=INTEGER},
+      </if>
+      <if test="groupState != null">
+        #{groupState,jdbcType=INTEGER},
+      </if>
+      <if test="groupTitle != null">
+        #{groupTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="groupVirtualTime != null">
+        #{groupVirtualTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.threefishes.cloudrepository.entity.GroupsExample" resultType="java.lang.Long">
+    select count(*) from groups
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update groups
+    <set>
+      <if test="record.groupId != null">
+        group_id = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyLimitNum != null">
+        buy_limit_num = #{record.buyLimitNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.groupExplain != null">
+        group_explain = #{record.groupExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupGameRule != null">
+        group_game_rule = #{record.groupGameRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupJoinedNum != null">
+        group_joined_num = #{record.groupJoinedNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupName != null">
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupOpenVirtual != null">
+        group_open_virtual = #{record.groupOpenVirtual,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupRequireNum != null">
+        group_require_num = #{record.groupRequireNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupState != null">
+        group_state = #{record.groupState,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupTitle != null">
+        group_title = #{record.groupTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupVirtualTime != null">
+        group_virtual_time = #{record.groupVirtualTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.storeId != null">
+        store_id = #{record.storeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update groups
+    set group_id = #{record.groupId,jdbcType=INTEGER},
+      buy_limit_num = #{record.buyLimitNum,jdbcType=INTEGER},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      group_explain = #{record.groupExplain,jdbcType=VARCHAR},
+      group_game_rule = #{record.groupGameRule,jdbcType=VARCHAR},
+      group_joined_num = #{record.groupJoinedNum,jdbcType=INTEGER},
+      group_name = #{record.groupName,jdbcType=VARCHAR},
+      group_open_virtual = #{record.groupOpenVirtual,jdbcType=INTEGER},
+      group_require_num = #{record.groupRequireNum,jdbcType=INTEGER},
+      group_state = #{record.groupState,jdbcType=INTEGER},
+      group_title = #{record.groupTitle,jdbcType=VARCHAR},
+      group_virtual_time = #{record.groupVirtualTime,jdbcType=TIMESTAMP},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      store_id = #{record.storeId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.threefishes.cloudrepository.entity.Groups">
+    update groups
+    <set>
+      <if test="buyLimitNum != null">
+        buy_limit_num = #{buyLimitNum,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="groupExplain != null">
+        group_explain = #{groupExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="groupGameRule != null">
+        group_game_rule = #{groupGameRule,jdbcType=VARCHAR},
+      </if>
+      <if test="groupJoinedNum != null">
+        group_joined_num = #{groupJoinedNum,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupOpenVirtual != null">
+        group_open_virtual = #{groupOpenVirtual,jdbcType=INTEGER},
+      </if>
+      <if test="groupRequireNum != null">
+        group_require_num = #{groupRequireNum,jdbcType=INTEGER},
+      </if>
+      <if test="groupState != null">
+        group_state = #{groupState,jdbcType=INTEGER},
+      </if>
+      <if test="groupTitle != null">
+        group_title = #{groupTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="groupVirtualTime != null">
+        group_virtual_time = #{groupVirtualTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.threefishes.cloudrepository.entity.Groups">
+    update groups
+    set buy_limit_num = #{buyLimitNum,jdbcType=INTEGER},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      group_explain = #{groupExplain,jdbcType=VARCHAR},
+      group_game_rule = #{groupGameRule,jdbcType=VARCHAR},
+      group_joined_num = #{groupJoinedNum,jdbcType=INTEGER},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      group_open_virtual = #{groupOpenVirtual,jdbcType=INTEGER},
+      group_require_num = #{groupRequireNum,jdbcType=INTEGER},
+      group_state = #{groupState,jdbcType=INTEGER},
+      group_title = #{groupTitle,jdbcType=VARCHAR},
+      group_virtual_time = #{groupVirtualTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      store_id = #{storeId,jdbcType=INTEGER}
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.threefishes.cloudrepository.entity.GroupsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from groups
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

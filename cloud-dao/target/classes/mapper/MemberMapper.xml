@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.threefishes.cloudrepository.dao.MemberMapper">
+  <resultMap id="BaseResultMap" type="cn.threefishes.cloudrepository.entity.Member">
+    <id column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="address_areaid" jdbcType="INTEGER" property="addressAreaid" />
+    <result column="address_areainfo" jdbcType="VARCHAR" property="addressAreainfo" />
+    <result column="address_cityid" jdbcType="INTEGER" property="addressCityid" />
+    <result column="address_provinceid" jdbcType="INTEGER" property="addressProvinceid" />
+    <result column="allow_buy" jdbcType="INTEGER" property="allowBuy" />
+    <result column="allow_talk" jdbcType="INTEGER" property="allowTalk" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="email_isbind" jdbcType="INTEGER" property="emailIsbind" />
+    <result column="experience_points" jdbcType="INTEGER" property="experiencePoints" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="is_distributor" jdbcType="INTEGER" property="isDistributor" />
+    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="login_num" jdbcType="INTEGER" property="loginNum" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="member_points" jdbcType="INTEGER" property="memberPoints" />
+    <result column="member_pwd" jdbcType="VARCHAR" property="memberPwd" />
+    <result column="member_sex" jdbcType="INTEGER" property="memberSex" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="mobile_isbind" jdbcType="INTEGER" property="mobileIsbind" />
+    <result column="modify_num" jdbcType="INTEGER" property="modifyNum" />
+    <result column="pay_pwd" jdbcType="VARCHAR" property="payPwd" />
+    <result column="predeposit_available" jdbcType="DECIMAL" property="predepositAvailable" />
+    <result column="predeposit_freeze" jdbcType="DECIMAL" property="predepositFreeze" />
+    <result column="qq_openid" jdbcType="VARCHAR" property="qqOpenid" />
+    <result column="qq_userinfo" jdbcType="VARCHAR" property="qqUserinfo" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="true_name" jdbcType="VARCHAR" property="trueName" />
+    <result column="weixin_mp_openid" jdbcType="VARCHAR" property="weixinMpOpenid" />
+    <result column="weixin_unionid" jdbcType="VARCHAR" property="weixinUnionid" />
+    <result column="weixin_userinfo" jdbcType="VARCHAR" property="weixinUserinfo" />
+    <result column="dw_id" jdbcType="VARCHAR" property="dwId" />
+    <result column="is_staff" jdbcType="INTEGER" property="isStaff" />
+    <result column="device_token" jdbcType="VARCHAR" property="deviceToken" />
+    <result column="member_type" jdbcType="INTEGER" property="memberType" />
+    <result column="superior_id" jdbcType="INTEGER" property="superiorId" />
+    <result column="charge_id" jdbcType="INTEGER" property="chargeId" />
+    <result column="manager_id" jdbcType="INTEGER" property="managerId" />
+    <result column="invitation_code" jdbcType="VARCHAR" property="invitationCode" />
+    <result column="month_amount" jdbcType="DECIMAL" property="monthAmount" />
+    <result column="half_year_amount" jdbcType="DECIMAL" property="halfYearAmount" />
+    <result column="year_amount" jdbcType="DECIMAL" property="yearAmount" />
+    <result column="all_amount" jdbcType="DECIMAL" property="allAmount" />
+    <result column="team_number" jdbcType="INTEGER" property="teamNumber" />
+    <result column="charge_name" jdbcType="VARCHAR" property="chargeName" />
+    <result column="manager_name" jdbcType="VARCHAR" property="managerName" />
+    <result column="superior_name" jdbcType="VARCHAR" property="superiorName" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="is_novice" jdbcType="INTEGER" property="isNovice" />
+    <result column="is_register_chatroom" jdbcType="INTEGER" property="isRegisterChatroom" />
+    <result column="is_silence_chatroom" jdbcType="INTEGER" property="isSilenceChatroom" />
+    <result column="is_silence_count" jdbcType="INTEGER" property="isSilenceCount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    member_id, address_areaid, address_areainfo, address_cityid, address_provinceid, 
+    allow_buy, allow_talk, avatar, birthday, email, email_isbind, experience_points, 
+    id_card, is_distributor, last_login_ip, last_login_time, login_ip, login_num, login_time, 
+    member_name, member_points, member_pwd, member_sex, mobile, mobile_isbind, modify_num, 
+    pay_pwd, predeposit_available, predeposit_freeze, qq_openid, qq_userinfo, register_time, 
+    state, true_name, weixin_mp_openid, weixin_unionid, weixin_userinfo, dw_id, is_staff, 
+    device_token, member_type, superior_id, charge_id, manager_id, invitation_code, month_amount, 
+    half_year_amount, year_amount, all_amount, team_number, charge_name, manager_name, 
+    superior_name, real_name, is_novice, is_register_chatroom, is_silence_chatroom, is_silence_count
+  </sql>
+  <select id="selectByExample" parameterType="cn.threefishes.cloudrepository.entity.MemberExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from member
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.threefishes.cloudrepository.entity.MemberExample">
+    delete from member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="member_id" keyProperty="memberId" parameterType="cn.threefishes.cloudrepository.entity.Member" useGeneratedKeys="true">
+    insert into member (address_areaid, address_areainfo, address_cityid, 
+      address_provinceid, allow_buy, allow_talk, 
+      avatar, birthday, email, 
+      email_isbind, experience_points, id_card, 
+      is_distributor, last_login_ip, last_login_time, 
+      login_ip, login_num, login_time, 
+      member_name, member_points, member_pwd, 
+      member_sex, mobile, mobile_isbind, 
+      modify_num, pay_pwd, predeposit_available, 
+      predeposit_freeze, qq_openid, qq_userinfo, 
+      register_time, state, true_name, 
+      weixin_mp_openid, weixin_unionid, weixin_userinfo, 
+      dw_id, is_staff, device_token, 
+      member_type, superior_id, charge_id, 
+      manager_id, invitation_code, month_amount, 
+      half_year_amount, year_amount, all_amount, 
+      team_number, charge_name, manager_name, 
+      superior_name, real_name, is_novice, 
+      is_register_chatroom, is_silence_chatroom, 
+      is_silence_count)
+    values (#{addressAreaid,jdbcType=INTEGER}, #{addressAreainfo,jdbcType=VARCHAR}, #{addressCityid,jdbcType=INTEGER}, 
+      #{addressProvinceid,jdbcType=INTEGER}, #{allowBuy,jdbcType=INTEGER}, #{allowTalk,jdbcType=INTEGER}, 
+      #{avatar,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, 
+      #{emailIsbind,jdbcType=INTEGER}, #{experiencePoints,jdbcType=INTEGER}, #{idCard,jdbcType=VARCHAR}, 
+      #{isDistributor,jdbcType=INTEGER}, #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{loginIp,jdbcType=VARCHAR}, #{loginNum,jdbcType=INTEGER}, #{loginTime,jdbcType=TIMESTAMP}, 
+      #{memberName,jdbcType=VARCHAR}, #{memberPoints,jdbcType=INTEGER}, #{memberPwd,jdbcType=VARCHAR}, 
+      #{memberSex,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{mobileIsbind,jdbcType=INTEGER}, 
+      #{modifyNum,jdbcType=INTEGER}, #{payPwd,jdbcType=VARCHAR}, #{predepositAvailable,jdbcType=DECIMAL}, 
+      #{predepositFreeze,jdbcType=DECIMAL}, #{qqOpenid,jdbcType=VARCHAR}, #{qqUserinfo,jdbcType=VARCHAR}, 
+      #{registerTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, #{trueName,jdbcType=VARCHAR}, 
+      #{weixinMpOpenid,jdbcType=VARCHAR}, #{weixinUnionid,jdbcType=VARCHAR}, #{weixinUserinfo,jdbcType=VARCHAR}, 
+      #{dwId,jdbcType=VARCHAR}, #{isStaff,jdbcType=INTEGER}, #{deviceToken,jdbcType=VARCHAR}, 
+      #{memberType,jdbcType=INTEGER}, #{superiorId,jdbcType=INTEGER}, #{chargeId,jdbcType=INTEGER}, 
+      #{managerId,jdbcType=INTEGER}, #{invitationCode,jdbcType=VARCHAR}, #{monthAmount,jdbcType=DECIMAL}, 
+      #{halfYearAmount,jdbcType=DECIMAL}, #{yearAmount,jdbcType=DECIMAL}, #{allAmount,jdbcType=DECIMAL}, 
+      #{teamNumber,jdbcType=INTEGER}, #{chargeName,jdbcType=VARCHAR}, #{managerName,jdbcType=VARCHAR}, 
+      #{superiorName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{isNovice,jdbcType=INTEGER}, 
+      #{isRegisterChatroom,jdbcType=INTEGER}, #{isSilenceChatroom,jdbcType=INTEGER}, 
+      #{isSilenceCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="member_id" keyProperty="memberId" parameterType="cn.threefishes.cloudrepository.entity.Member" useGeneratedKeys="true">
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addressAreaid != null">
+        address_areaid,
+      </if>
+      <if test="addressAreainfo != null">
+        address_areainfo,
+      </if>
+      <if test="addressCityid != null">
+        address_cityid,
+      </if>
+      <if test="addressProvinceid != null">
+        address_provinceid,
+      </if>
+      <if test="allowBuy != null">
+        allow_buy,
+      </if>
+      <if test="allowTalk != null">
+        allow_talk,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="emailIsbind != null">
+        email_isbind,
+      </if>
+      <if test="experiencePoints != null">
+        experience_points,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="isDistributor != null">
+        is_distributor,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
+      <if test="loginNum != null">
+        login_num,
+      </if>
+      <if test="loginTime != null">
+        login_time,
+      </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="memberPoints != null">
+        member_points,
+      </if>
+      <if test="memberPwd != null">
+        member_pwd,
+      </if>
+      <if test="memberSex != null">
+        member_sex,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="mobileIsbind != null">
+        mobile_isbind,
+      </if>
+      <if test="modifyNum != null">
+        modify_num,
+      </if>
+      <if test="payPwd != null">
+        pay_pwd,
+      </if>
+      <if test="predepositAvailable != null">
+        predeposit_available,
+      </if>
+      <if test="predepositFreeze != null">
+        predeposit_freeze,
+      </if>
+      <if test="qqOpenid != null">
+        qq_openid,
+      </if>
+      <if test="qqUserinfo != null">
+        qq_userinfo,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="trueName != null">
+        true_name,
+      </if>
+      <if test="weixinMpOpenid != null">
+        weixin_mp_openid,
+      </if>
+      <if test="weixinUnionid != null">
+        weixin_unionid,
+      </if>
+      <if test="weixinUserinfo != null">
+        weixin_userinfo,
+      </if>
+      <if test="dwId != null">
+        dw_id,
+      </if>
+      <if test="isStaff != null">
+        is_staff,
+      </if>
+      <if test="deviceToken != null">
+        device_token,
+      </if>
+      <if test="memberType != null">
+        member_type,
+      </if>
+      <if test="superiorId != null">
+        superior_id,
+      </if>
+      <if test="chargeId != null">
+        charge_id,
+      </if>
+      <if test="managerId != null">
+        manager_id,
+      </if>
+      <if test="invitationCode != null">
+        invitation_code,
+      </if>
+      <if test="monthAmount != null">
+        month_amount,
+      </if>
+      <if test="halfYearAmount != null">
+        half_year_amount,
+      </if>
+      <if test="yearAmount != null">
+        year_amount,
+      </if>
+      <if test="allAmount != null">
+        all_amount,
+      </if>
+      <if test="teamNumber != null">
+        team_number,
+      </if>
+      <if test="chargeName != null">
+        charge_name,
+      </if>
+      <if test="managerName != null">
+        manager_name,
+      </if>
+      <if test="superiorName != null">
+        superior_name,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="isNovice != null">
+        is_novice,
+      </if>
+      <if test="isRegisterChatroom != null">
+        is_register_chatroom,
+      </if>
+      <if test="isSilenceChatroom != null">
+        is_silence_chatroom,
+      </if>
+      <if test="isSilenceCount != null">
+        is_silence_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addressAreaid != null">
+        #{addressAreaid,jdbcType=INTEGER},
+      </if>
+      <if test="addressAreainfo != null">
+        #{addressAreainfo,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCityid != null">
+        #{addressCityid,jdbcType=INTEGER},
+      </if>
+      <if test="addressProvinceid != null">
+        #{addressProvinceid,jdbcType=INTEGER},
+      </if>
+      <if test="allowBuy != null">
+        #{allowBuy,jdbcType=INTEGER},
+      </if>
+      <if test="allowTalk != null">
+        #{allowTalk,jdbcType=INTEGER},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailIsbind != null">
+        #{emailIsbind,jdbcType=INTEGER},
+      </if>
+      <if test="experiencePoints != null">
+        #{experiencePoints,jdbcType=INTEGER},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isDistributor != null">
+        #{isDistributor,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginNum != null">
+        #{loginNum,jdbcType=INTEGER},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPoints != null">
+        #{memberPoints,jdbcType=INTEGER},
+      </if>
+      <if test="memberPwd != null">
+        #{memberPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSex != null">
+        #{memberSex,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileIsbind != null">
+        #{mobileIsbind,jdbcType=INTEGER},
+      </if>
+      <if test="modifyNum != null">
+        #{modifyNum,jdbcType=INTEGER},
+      </if>
+      <if test="payPwd != null">
+        #{payPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="predepositAvailable != null">
+        #{predepositAvailable,jdbcType=DECIMAL},
+      </if>
+      <if test="predepositFreeze != null">
+        #{predepositFreeze,jdbcType=DECIMAL},
+      </if>
+      <if test="qqOpenid != null">
+        #{qqOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="qqUserinfo != null">
+        #{qqUserinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="trueName != null">
+        #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinMpOpenid != null">
+        #{weixinMpOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinUnionid != null">
+        #{weixinUnionid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinUserinfo != null">
+        #{weixinUserinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="dwId != null">
+        #{dwId,jdbcType=VARCHAR},
+      </if>
+      <if test="isStaff != null">
+        #{isStaff,jdbcType=INTEGER},
+      </if>
+      <if test="deviceToken != null">
+        #{deviceToken,jdbcType=VARCHAR},
+      </if>
+      <if test="memberType != null">
+        #{memberType,jdbcType=INTEGER},
+      </if>
+      <if test="superiorId != null">
+        #{superiorId,jdbcType=INTEGER},
+      </if>
+      <if test="chargeId != null">
+        #{chargeId,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="invitationCode != null">
+        #{invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="monthAmount != null">
+        #{monthAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="halfYearAmount != null">
+        #{halfYearAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="yearAmount != null">
+        #{yearAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="allAmount != null">
+        #{allAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="teamNumber != null">
+        #{teamNumber,jdbcType=INTEGER},
+      </if>
+      <if test="chargeName != null">
+        #{chargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerName != null">
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorName != null">
+        #{superiorName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="isNovice != null">
+        #{isNovice,jdbcType=INTEGER},
+      </if>
+      <if test="isRegisterChatroom != null">
+        #{isRegisterChatroom,jdbcType=INTEGER},
+      </if>
+      <if test="isSilenceChatroom != null">
+        #{isSilenceChatroom,jdbcType=INTEGER},
+      </if>
+      <if test="isSilenceCount != null">
+        #{isSilenceCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.threefishes.cloudrepository.entity.MemberExample" resultType="java.lang.Long">
+    select count(*) from member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update member
+    <set>
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressAreaid != null">
+        address_areaid = #{record.addressAreaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressAreainfo != null">
+        address_areainfo = #{record.addressAreainfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressCityid != null">
+        address_cityid = #{record.addressCityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressProvinceid != null">
+        address_provinceid = #{record.addressProvinceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.allowBuy != null">
+        allow_buy = #{record.allowBuy,jdbcType=INTEGER},
+      </if>
+      <if test="record.allowTalk != null">
+        allow_talk = #{record.allowTalk,jdbcType=INTEGER},
+      </if>
+      <if test="record.avatar != null">
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailIsbind != null">
+        email_isbind = #{record.emailIsbind,jdbcType=INTEGER},
+      </if>
+      <if test="record.experiencePoints != null">
+        experience_points = #{record.experiencePoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.idCard != null">
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDistributor != null">
+        is_distributor = #{record.isDistributor,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastLoginIp != null">
+        last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginTime != null">
+        last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginIp != null">
+        login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginNum != null">
+        login_num = #{record.loginNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginTime != null">
+        login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.memberName != null">
+        member_name = #{record.memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberPoints != null">
+        member_points = #{record.memberPoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberPwd != null">
+        member_pwd = #{record.memberPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberSex != null">
+        member_sex = #{record.memberSex,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileIsbind != null">
+        mobile_isbind = #{record.mobileIsbind,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyNum != null">
+        modify_num = #{record.modifyNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.payPwd != null">
+        pay_pwd = #{record.payPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.predepositAvailable != null">
+        predeposit_available = #{record.predepositAvailable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.predepositFreeze != null">
+        predeposit_freeze = #{record.predepositFreeze,jdbcType=DECIMAL},
+      </if>
+      <if test="record.qqOpenid != null">
+        qq_openid = #{record.qqOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qqUserinfo != null">
+        qq_userinfo = #{record.qqUserinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerTime != null">
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.trueName != null">
+        true_name = #{record.trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixinMpOpenid != null">
+        weixin_mp_openid = #{record.weixinMpOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixinUnionid != null">
+        weixin_unionid = #{record.weixinUnionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixinUserinfo != null">
+        weixin_userinfo = #{record.weixinUserinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dwId != null">
+        dw_id = #{record.dwId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isStaff != null">
+        is_staff = #{record.isStaff,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceToken != null">
+        device_token = #{record.deviceToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberType != null">
+        member_type = #{record.memberType,jdbcType=INTEGER},
+      </if>
+      <if test="record.superiorId != null">
+        superior_id = #{record.superiorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.chargeId != null">
+        charge_id = #{record.chargeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.managerId != null">
+        manager_id = #{record.managerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.invitationCode != null">
+        invitation_code = #{record.invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthAmount != null">
+        month_amount = #{record.monthAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.halfYearAmount != null">
+        half_year_amount = #{record.halfYearAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yearAmount != null">
+        year_amount = #{record.yearAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.allAmount != null">
+        all_amount = #{record.allAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.teamNumber != null">
+        team_number = #{record.teamNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.chargeName != null">
+        charge_name = #{record.chargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerName != null">
+        manager_name = #{record.managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superiorName != null">
+        superior_name = #{record.superiorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null">
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isNovice != null">
+        is_novice = #{record.isNovice,jdbcType=INTEGER},
+      </if>
+      <if test="record.isRegisterChatroom != null">
+        is_register_chatroom = #{record.isRegisterChatroom,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSilenceChatroom != null">
+        is_silence_chatroom = #{record.isSilenceChatroom,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSilenceCount != null">
+        is_silence_count = #{record.isSilenceCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update member
+    set member_id = #{record.memberId,jdbcType=INTEGER},
+      address_areaid = #{record.addressAreaid,jdbcType=INTEGER},
+      address_areainfo = #{record.addressAreainfo,jdbcType=VARCHAR},
+      address_cityid = #{record.addressCityid,jdbcType=INTEGER},
+      address_provinceid = #{record.addressProvinceid,jdbcType=INTEGER},
+      allow_buy = #{record.allowBuy,jdbcType=INTEGER},
+      allow_talk = #{record.allowTalk,jdbcType=INTEGER},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      email = #{record.email,jdbcType=VARCHAR},
+      email_isbind = #{record.emailIsbind,jdbcType=INTEGER},
+      experience_points = #{record.experiencePoints,jdbcType=INTEGER},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      is_distributor = #{record.isDistributor,jdbcType=INTEGER},
+      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      login_num = #{record.loginNum,jdbcType=INTEGER},
+      login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      member_name = #{record.memberName,jdbcType=VARCHAR},
+      member_points = #{record.memberPoints,jdbcType=INTEGER},
+      member_pwd = #{record.memberPwd,jdbcType=VARCHAR},
+      member_sex = #{record.memberSex,jdbcType=INTEGER},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      mobile_isbind = #{record.mobileIsbind,jdbcType=INTEGER},
+      modify_num = #{record.modifyNum,jdbcType=INTEGER},
+      pay_pwd = #{record.payPwd,jdbcType=VARCHAR},
+      predeposit_available = #{record.predepositAvailable,jdbcType=DECIMAL},
+      predeposit_freeze = #{record.predepositFreeze,jdbcType=DECIMAL},
+      qq_openid = #{record.qqOpenid,jdbcType=VARCHAR},
+      qq_userinfo = #{record.qqUserinfo,jdbcType=VARCHAR},
+      register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      state = #{record.state,jdbcType=INTEGER},
+      true_name = #{record.trueName,jdbcType=VARCHAR},
+      weixin_mp_openid = #{record.weixinMpOpenid,jdbcType=VARCHAR},
+      weixin_unionid = #{record.weixinUnionid,jdbcType=VARCHAR},
+      weixin_userinfo = #{record.weixinUserinfo,jdbcType=VARCHAR},
+      dw_id = #{record.dwId,jdbcType=VARCHAR},
+      is_staff = #{record.isStaff,jdbcType=INTEGER},
+      device_token = #{record.deviceToken,jdbcType=VARCHAR},
+      member_type = #{record.memberType,jdbcType=INTEGER},
+      superior_id = #{record.superiorId,jdbcType=INTEGER},
+      charge_id = #{record.chargeId,jdbcType=INTEGER},
+      manager_id = #{record.managerId,jdbcType=INTEGER},
+      invitation_code = #{record.invitationCode,jdbcType=VARCHAR},
+      month_amount = #{record.monthAmount,jdbcType=DECIMAL},
+      half_year_amount = #{record.halfYearAmount,jdbcType=DECIMAL},
+      year_amount = #{record.yearAmount,jdbcType=DECIMAL},
+      all_amount = #{record.allAmount,jdbcType=DECIMAL},
+      team_number = #{record.teamNumber,jdbcType=INTEGER},
+      charge_name = #{record.chargeName,jdbcType=VARCHAR},
+      manager_name = #{record.managerName,jdbcType=VARCHAR},
+      superior_name = #{record.superiorName,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      is_novice = #{record.isNovice,jdbcType=INTEGER},
+      is_register_chatroom = #{record.isRegisterChatroom,jdbcType=INTEGER},
+      is_silence_chatroom = #{record.isSilenceChatroom,jdbcType=INTEGER},
+      is_silence_count = #{record.isSilenceCount,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.threefishes.cloudrepository.entity.Member">
+    update member
+    <set>
+      <if test="addressAreaid != null">
+        address_areaid = #{addressAreaid,jdbcType=INTEGER},
+      </if>
+      <if test="addressAreainfo != null">
+        address_areainfo = #{addressAreainfo,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCityid != null">
+        address_cityid = #{addressCityid,jdbcType=INTEGER},
+      </if>
+      <if test="addressProvinceid != null">
+        address_provinceid = #{addressProvinceid,jdbcType=INTEGER},
+      </if>
+      <if test="allowBuy != null">
+        allow_buy = #{allowBuy,jdbcType=INTEGER},
+      </if>
+      <if test="allowTalk != null">
+        allow_talk = #{allowTalk,jdbcType=INTEGER},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailIsbind != null">
+        email_isbind = #{emailIsbind,jdbcType=INTEGER},
+      </if>
+      <if test="experiencePoints != null">
+        experience_points = #{experiencePoints,jdbcType=INTEGER},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isDistributor != null">
+        is_distributor = #{isDistributor,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null">
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginNum != null">
+        login_num = #{loginNum,jdbcType=INTEGER},
+      </if>
+      <if test="loginTime != null">
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPoints != null">
+        member_points = #{memberPoints,jdbcType=INTEGER},
+      </if>
+      <if test="memberPwd != null">
+        member_pwd = #{memberPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSex != null">
+        member_sex = #{memberSex,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileIsbind != null">
+        mobile_isbind = #{mobileIsbind,jdbcType=INTEGER},
+      </if>
+      <if test="modifyNum != null">
+        modify_num = #{modifyNum,jdbcType=INTEGER},
+      </if>
+      <if test="payPwd != null">
+        pay_pwd = #{payPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="predepositAvailable != null">
+        predeposit_available = #{predepositAvailable,jdbcType=DECIMAL},
+      </if>
+      <if test="predepositFreeze != null">
+        predeposit_freeze = #{predepositFreeze,jdbcType=DECIMAL},
+      </if>
+      <if test="qqOpenid != null">
+        qq_openid = #{qqOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="qqUserinfo != null">
+        qq_userinfo = #{qqUserinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="trueName != null">
+        true_name = #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinMpOpenid != null">
+        weixin_mp_openid = #{weixinMpOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinUnionid != null">
+        weixin_unionid = #{weixinUnionid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinUserinfo != null">
+        weixin_userinfo = #{weixinUserinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="dwId != null">
+        dw_id = #{dwId,jdbcType=VARCHAR},
+      </if>
+      <if test="isStaff != null">
+        is_staff = #{isStaff,jdbcType=INTEGER},
+      </if>
+      <if test="deviceToken != null">
+        device_token = #{deviceToken,jdbcType=VARCHAR},
+      </if>
+      <if test="memberType != null">
+        member_type = #{memberType,jdbcType=INTEGER},
+      </if>
+      <if test="superiorId != null">
+        superior_id = #{superiorId,jdbcType=INTEGER},
+      </if>
+      <if test="chargeId != null">
+        charge_id = #{chargeId,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null">
+        manager_id = #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="invitationCode != null">
+        invitation_code = #{invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="monthAmount != null">
+        month_amount = #{monthAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="halfYearAmount != null">
+        half_year_amount = #{halfYearAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="yearAmount != null">
+        year_amount = #{yearAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="allAmount != null">
+        all_amount = #{allAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="teamNumber != null">
+        team_number = #{teamNumber,jdbcType=INTEGER},
+      </if>
+      <if test="chargeName != null">
+        charge_name = #{chargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerName != null">
+        manager_name = #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorName != null">
+        superior_name = #{superiorName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="isNovice != null">
+        is_novice = #{isNovice,jdbcType=INTEGER},
+      </if>
+      <if test="isRegisterChatroom != null">
+        is_register_chatroom = #{isRegisterChatroom,jdbcType=INTEGER},
+      </if>
+      <if test="isSilenceChatroom != null">
+        is_silence_chatroom = #{isSilenceChatroom,jdbcType=INTEGER},
+      </if>
+      <if test="isSilenceCount != null">
+        is_silence_count = #{isSilenceCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.threefishes.cloudrepository.entity.Member">
+    update member
+    set address_areaid = #{addressAreaid,jdbcType=INTEGER},
+      address_areainfo = #{addressAreainfo,jdbcType=VARCHAR},
+      address_cityid = #{addressCityid,jdbcType=INTEGER},
+      address_provinceid = #{addressProvinceid,jdbcType=INTEGER},
+      allow_buy = #{allowBuy,jdbcType=INTEGER},
+      allow_talk = #{allowTalk,jdbcType=INTEGER},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      email = #{email,jdbcType=VARCHAR},
+      email_isbind = #{emailIsbind,jdbcType=INTEGER},
+      experience_points = #{experiencePoints,jdbcType=INTEGER},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      is_distributor = #{isDistributor,jdbcType=INTEGER},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      login_num = #{loginNum,jdbcType=INTEGER},
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      member_points = #{memberPoints,jdbcType=INTEGER},
+      member_pwd = #{memberPwd,jdbcType=VARCHAR},
+      member_sex = #{memberSex,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      mobile_isbind = #{mobileIsbind,jdbcType=INTEGER},
+      modify_num = #{modifyNum,jdbcType=INTEGER},
+      pay_pwd = #{payPwd,jdbcType=VARCHAR},
+      predeposit_available = #{predepositAvailable,jdbcType=DECIMAL},
+      predeposit_freeze = #{predepositFreeze,jdbcType=DECIMAL},
+      qq_openid = #{qqOpenid,jdbcType=VARCHAR},
+      qq_userinfo = #{qqUserinfo,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      true_name = #{trueName,jdbcType=VARCHAR},
+      weixin_mp_openid = #{weixinMpOpenid,jdbcType=VARCHAR},
+      weixin_unionid = #{weixinUnionid,jdbcType=VARCHAR},
+      weixin_userinfo = #{weixinUserinfo,jdbcType=VARCHAR},
+      dw_id = #{dwId,jdbcType=VARCHAR},
+      is_staff = #{isStaff,jdbcType=INTEGER},
+      device_token = #{deviceToken,jdbcType=VARCHAR},
+      member_type = #{memberType,jdbcType=INTEGER},
+      superior_id = #{superiorId,jdbcType=INTEGER},
+      charge_id = #{chargeId,jdbcType=INTEGER},
+      manager_id = #{managerId,jdbcType=INTEGER},
+      invitation_code = #{invitationCode,jdbcType=VARCHAR},
+      month_amount = #{monthAmount,jdbcType=DECIMAL},
+      half_year_amount = #{halfYearAmount,jdbcType=DECIMAL},
+      year_amount = #{yearAmount,jdbcType=DECIMAL},
+      all_amount = #{allAmount,jdbcType=DECIMAL},
+      team_number = #{teamNumber,jdbcType=INTEGER},
+      charge_name = #{chargeName,jdbcType=VARCHAR},
+      manager_name = #{managerName,jdbcType=VARCHAR},
+      superior_name = #{superiorName,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      is_novice = #{isNovice,jdbcType=INTEGER},
+      is_register_chatroom = #{isRegisterChatroom,jdbcType=INTEGER},
+      is_silence_chatroom = #{isSilenceChatroom,jdbcType=INTEGER},
+      is_silence_count = #{isSilenceCount,jdbcType=INTEGER}
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.threefishes.cloudrepository.entity.MemberExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

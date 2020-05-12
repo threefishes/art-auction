@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.threefishes.cloudrepository.dao.ShipCompanyMapper">
+  <resultMap id="BaseResultMap" type="cn.threefishes.cloudrepository.entity.ShipCompany">
+    <id column="ship_id" jdbcType="INTEGER" property="shipId" />
+    <result column="ship_code" jdbcType="VARCHAR" property="shipCode" />
+    <result column="ship_letter" jdbcType="VARCHAR" property="shipLetter" />
+    <result column="ship_name" jdbcType="VARCHAR" property="shipName" />
+    <result column="ship_state" jdbcType="INTEGER" property="shipState" />
+    <result column="ship_type" jdbcType="INTEGER" property="shipType" />
+    <result column="ship_url" jdbcType="VARCHAR" property="shipUrl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ship_id, ship_code, ship_letter, ship_name, ship_state, ship_type, ship_url
+  </sql>
+  <select id="selectByExample" parameterType="cn.threefishes.cloudrepository.entity.ShipCompanyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ship_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ship_company
+    where ship_id = #{shipId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ship_company
+    where ship_id = #{shipId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.threefishes.cloudrepository.entity.ShipCompanyExample">
+    delete from ship_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="ship_id" keyProperty="shipId" parameterType="cn.threefishes.cloudrepository.entity.ShipCompany" useGeneratedKeys="true">
+    insert into ship_company (ship_code, ship_letter, ship_name, 
+      ship_state, ship_type, ship_url
+      )
+    values (#{shipCode,jdbcType=VARCHAR}, #{shipLetter,jdbcType=VARCHAR}, #{shipName,jdbcType=VARCHAR}, 
+      #{shipState,jdbcType=INTEGER}, #{shipType,jdbcType=INTEGER}, #{shipUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ship_id" keyProperty="shipId" parameterType="cn.threefishes.cloudrepository.entity.ShipCompany" useGeneratedKeys="true">
+    insert into ship_company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shipCode != null">
+        ship_code,
+      </if>
+      <if test="shipLetter != null">
+        ship_letter,
+      </if>
+      <if test="shipName != null">
+        ship_name,
+      </if>
+      <if test="shipState != null">
+        ship_state,
+      </if>
+      <if test="shipType != null">
+        ship_type,
+      </if>
+      <if test="shipUrl != null">
+        ship_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shipCode != null">
+        #{shipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shipLetter != null">
+        #{shipLetter,jdbcType=VARCHAR},
+      </if>
+      <if test="shipName != null">
+        #{shipName,jdbcType=VARCHAR},
+      </if>
+      <if test="shipState != null">
+        #{shipState,jdbcType=INTEGER},
+      </if>
+      <if test="shipType != null">
+        #{shipType,jdbcType=INTEGER},
+      </if>
+      <if test="shipUrl != null">
+        #{shipUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.threefishes.cloudrepository.entity.ShipCompanyExample" resultType="java.lang.Long">
+    select count(*) from ship_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ship_company
+    <set>
+      <if test="record.shipId != null">
+        ship_id = #{record.shipId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipCode != null">
+        ship_code = #{record.shipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipLetter != null">
+        ship_letter = #{record.shipLetter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipName != null">
+        ship_name = #{record.shipName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipState != null">
+        ship_state = #{record.shipState,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipType != null">
+        ship_type = #{record.shipType,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipUrl != null">
+        ship_url = #{record.shipUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ship_company
+    set ship_id = #{record.shipId,jdbcType=INTEGER},
+      ship_code = #{record.shipCode,jdbcType=VARCHAR},
+      ship_letter = #{record.shipLetter,jdbcType=VARCHAR},
+      ship_name = #{record.shipName,jdbcType=VARCHAR},
+      ship_state = #{record.shipState,jdbcType=INTEGER},
+      ship_type = #{record.shipType,jdbcType=INTEGER},
+      ship_url = #{record.shipUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.threefishes.cloudrepository.entity.ShipCompany">
+    update ship_company
+    <set>
+      <if test="shipCode != null">
+        ship_code = #{shipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shipLetter != null">
+        ship_letter = #{shipLetter,jdbcType=VARCHAR},
+      </if>
+      <if test="shipName != null">
+        ship_name = #{shipName,jdbcType=VARCHAR},
+      </if>
+      <if test="shipState != null">
+        ship_state = #{shipState,jdbcType=INTEGER},
+      </if>
+      <if test="shipType != null">
+        ship_type = #{shipType,jdbcType=INTEGER},
+      </if>
+      <if test="shipUrl != null">
+        ship_url = #{shipUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ship_id = #{shipId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.threefishes.cloudrepository.entity.ShipCompany">
+    update ship_company
+    set ship_code = #{shipCode,jdbcType=VARCHAR},
+      ship_letter = #{shipLetter,jdbcType=VARCHAR},
+      ship_name = #{shipName,jdbcType=VARCHAR},
+      ship_state = #{shipState,jdbcType=INTEGER},
+      ship_type = #{shipType,jdbcType=INTEGER},
+      ship_url = #{shipUrl,jdbcType=VARCHAR}
+    where ship_id = #{shipId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.threefishes.cloudrepository.entity.ShipCompanyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ship_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

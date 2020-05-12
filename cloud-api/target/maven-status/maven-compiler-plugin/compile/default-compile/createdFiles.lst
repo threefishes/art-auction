@@ -1,0 +1,12 @@
+cn/threefishes/cloudapi/config/aspect/DataBaseAspect.class
+cn/threefishes/cloudapi/config/aspect/SysLogAspect.class
+cn/threefishes/cloudapi/vo/MemberVo.class
+META-INF/spring-configuration-metadata.json
+cn/threefishes/cloudapi/config/hikari/DBProperties.class
+cn/threefishes/cloudapi/config/hikari/HikariDataSourceConfig.class
+cn/threefishes/CloudMainServiceEntranceApplication.class
+cn/threefishes/cloudapi/config/Swagger2Config.class
+cn/threefishes/cloudapi/control/common/BaseController.class
+cn/threefishes/cloudapi/config/aspect/DataSourceContextHolder.class
+cn/threefishes/cloudapi/config/aspect/DynamicDataSource.class
+cn/threefishes/cloudapi/control/activity/HelloTvController.class

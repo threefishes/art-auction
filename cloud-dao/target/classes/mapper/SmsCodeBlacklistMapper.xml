@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.threefishes.cloudrepository.dao.SmsCodeBlacklistMapper">
+  <resultMap id="BaseResultMap" type="cn.threefishes.cloudrepository.entity.SmsCodeBlacklist">
+    <id column="mobile" jdbcType="DECIMAL" property="mobile" />
+    <result column="restrictedreg" jdbcType="DECIMAL" property="restrictedreg" />
+    <result column="restrictedlog" jdbcType="DECIMAL" property="restrictedlog" />
+    <result column="restrictedpwd" jdbcType="DECIMAL" property="restrictedpwd" />
+    <result column="restrictedver" jdbcType="DECIMAL" property="restrictedver" />
+    <result column="restrictedbin" jdbcType="DECIMAL" property="restrictedbin" />
+    <result column="status" jdbcType="DECIMAL" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    mobile, restrictedreg, restrictedlog, restrictedpwd, restrictedver, restrictedbin, 
+    status
+  </sql>
+  <select id="selectByExample" parameterType="cn.threefishes.cloudrepository.entity.SmsCodeBlacklistExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sms_code_blacklist
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sms_code_blacklist
+    where mobile = #{mobile,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sms_code_blacklist
+    where mobile = #{mobile,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.threefishes.cloudrepository.entity.SmsCodeBlacklistExample">
+    delete from sms_code_blacklist
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="mobile" keyProperty="mobile" parameterType="cn.threefishes.cloudrepository.entity.SmsCodeBlacklist" useGeneratedKeys="true">
+    insert into sms_code_blacklist (restrictedreg, restrictedlog, restrictedpwd, 
+      restrictedver, restrictedbin, status
+      )
+    values (#{restrictedreg,jdbcType=DECIMAL}, #{restrictedlog,jdbcType=DECIMAL}, #{restrictedpwd,jdbcType=DECIMAL}, 
+      #{restrictedver,jdbcType=DECIMAL}, #{restrictedbin,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="mobile" keyProperty="mobile" parameterType="cn.threefishes.cloudrepository.entity.SmsCodeBlacklist" useGeneratedKeys="true">
+    insert into sms_code_blacklist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="restrictedreg != null">
+        restrictedreg,
+      </if>
+      <if test="restrictedlog != null">
+        restrictedlog,
+      </if>
+      <if test="restrictedpwd != null">
+        restrictedpwd,
+      </if>
+      <if test="restrictedver != null">
+        restrictedver,
+      </if>
+      <if test="restrictedbin != null">
+        restrictedbin,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="restrictedreg != null">
+        #{restrictedreg,jdbcType=DECIMAL},
+      </if>
+      <if test="restrictedlog != null">
+        #{restrictedlog,jdbcType=DECIMAL},
+      </if>
+      <if test="restrictedpwd != null">
+        #{restrictedpwd,jdbcType=DECIMAL},
+      </if>
+      <if test="restrictedver != null">
+        #{restrictedver,jdbcType=DECIMAL},
+      </if>
+      <if test="restrictedbin != null">
+        #{restrictedbin,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.threefishes.cloudrepository.entity.SmsCodeBlacklistExample" resultType="java.lang.Long">
+    select count(*) from sms_code_blacklist
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sms_code_blacklist
+    <set>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=DECIMAL},
+      </if>
+      <if test="record.restrictedreg != null">
+        restrictedreg = #{record.restrictedreg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.restrictedlog != null">
+        restrictedlog = #{record.restrictedlog,jdbcType=DECIMAL},
+      </if>
+      <if test="record.restrictedpwd != null">
+        restrictedpwd = #{record.restrictedpwd,jdbcType=DECIMAL},
+      </if>
+      <if test="record.restrictedver != null">
+        restrictedver = #{record.restrictedver,jdbcType=DECIMAL},
+      </if>
+      <if test="record.restrictedbin != null">
+        restrictedbin = #{record.restrictedbin,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sms_code_blacklist
+    set mobile = #{record.mobile,jdbcType=DECIMAL},
+      restrictedreg = #{record.restrictedreg,jdbcType=DECIMAL},
+      restrictedlog = #{record.restrictedlog,jdbcType=DECIMAL},
+      restrictedpwd = #{record.restrictedpwd,jdbcType=DECIMAL},
+      restrictedver = #{record.restrictedver,jdbcType=DECIMAL},
+      restrictedbin = #{record.restrictedbin,jdbcType=DECIMAL},
+      status = #{record.status,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.threefishes.cloudrepository.entity.SmsCodeBlacklist">
+    update sms_code_blacklist
+    <set>
+      <if test="restrictedreg != null">
+        restrictedreg = #{restrictedreg,jdbcType=DECIMAL},
+      </if>
+      <if test="restrictedlog != null">
+        restrictedlog = #{restrictedlog,jdbcType=DECIMAL},
+      </if>
+      <if test="restrictedpwd != null">
+        restrictedpwd = #{restrictedpwd,jdbcType=DECIMAL},
+      </if>
+      <if test="restrictedver != null">
+        restrictedver = #{restrictedver,jdbcType=DECIMAL},
+      </if>
+      <if test="restrictedbin != null">
+        restrictedbin = #{restrictedbin,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where mobile = #{mobile,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.threefishes.cloudrepository.entity.SmsCodeBlacklist">
+    update sms_code_blacklist
+    set restrictedreg = #{restrictedreg,jdbcType=DECIMAL},
+      restrictedlog = #{restrictedlog,jdbcType=DECIMAL},
+      restrictedpwd = #{restrictedpwd,jdbcType=DECIMAL},
+      restrictedver = #{restrictedver,jdbcType=DECIMAL},
+      restrictedbin = #{restrictedbin,jdbcType=DECIMAL},
+      status = #{status,jdbcType=DECIMAL}
+    where mobile = #{mobile,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.threefishes.cloudrepository.entity.SmsCodeBlacklistExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sms_code_blacklist
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

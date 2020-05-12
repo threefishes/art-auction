@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.threefishes.cloudrepository.dao.CouponUseGoodsMapper">
+  <resultMap id="BaseResultMap" type="cn.threefishes.cloudrepository.entity.CouponUseGoods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="activity_id" jdbcType="INTEGER" property="activityId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="category_id_1" jdbcType="INTEGER" property="categoryId1" />
+    <result column="category_id_2" jdbcType="INTEGER" property="categoryId2" />
+    <result column="category_id_3" jdbcType="INTEGER" property="categoryId3" />
+    <result column="category_name_1" jdbcType="VARCHAR" property="categoryName1" />
+    <result column="category_name_2" jdbcType="VARCHAR" property="categoryName2" />
+    <result column="category_name_3" jdbcType="VARCHAR" property="categoryName3" />
+    <result column="common_id" jdbcType="INTEGER" property="commonId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, activity_id, category_id, category_id_1, category_id_2, category_id_3, category_name_1, 
+    category_name_2, category_name_3, common_id
+  </sql>
+  <select id="selectByExample" parameterType="cn.threefishes.cloudrepository.entity.CouponUseGoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from coupon_use_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coupon_use_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from coupon_use_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.threefishes.cloudrepository.entity.CouponUseGoodsExample">
+    delete from coupon_use_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.threefishes.cloudrepository.entity.CouponUseGoods" useGeneratedKeys="true">
+    insert into coupon_use_goods (activity_id, category_id, category_id_1, 
+      category_id_2, category_id_3, category_name_1, 
+      category_name_2, category_name_3, common_id
+      )
+    values (#{activityId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{categoryId1,jdbcType=INTEGER}, 
+      #{categoryId2,jdbcType=INTEGER}, #{categoryId3,jdbcType=INTEGER}, #{categoryName1,jdbcType=VARCHAR}, 
+      #{categoryName2,jdbcType=VARCHAR}, #{categoryName3,jdbcType=VARCHAR}, #{commonId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.threefishes.cloudrepository.entity.CouponUseGoods" useGeneratedKeys="true">
+    insert into coupon_use_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        activity_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="categoryId1 != null">
+        category_id_1,
+      </if>
+      <if test="categoryId2 != null">
+        category_id_2,
+      </if>
+      <if test="categoryId3 != null">
+        category_id_3,
+      </if>
+      <if test="categoryName1 != null">
+        category_name_1,
+      </if>
+      <if test="categoryName2 != null">
+        category_name_2,
+      </if>
+      <if test="categoryName3 != null">
+        category_name_3,
+      </if>
+      <if test="commonId != null">
+        common_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId1 != null">
+        #{categoryId1,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId2 != null">
+        #{categoryId2,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId3 != null">
+        #{categoryId3,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName1 != null">
+        #{categoryName1,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName2 != null">
+        #{categoryName2,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName3 != null">
+        #{categoryName3,jdbcType=VARCHAR},
+      </if>
+      <if test="commonId != null">
+        #{commonId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.threefishes.cloudrepository.entity.CouponUseGoodsExample" resultType="java.lang.Long">
+    select count(*) from coupon_use_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update coupon_use_goods
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.activityId != null">
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId1 != null">
+        category_id_1 = #{record.categoryId1,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId2 != null">
+        category_id_2 = #{record.categoryId2,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId3 != null">
+        category_id_3 = #{record.categoryId3,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryName1 != null">
+        category_name_1 = #{record.categoryName1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryName2 != null">
+        category_name_2 = #{record.categoryName2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryName3 != null">
+        category_name_3 = #{record.categoryName3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commonId != null">
+        common_id = #{record.commonId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update coupon_use_goods
+    set id = #{record.id,jdbcType=INTEGER},
+      activity_id = #{record.activityId,jdbcType=INTEGER},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      category_id_1 = #{record.categoryId1,jdbcType=INTEGER},
+      category_id_2 = #{record.categoryId2,jdbcType=INTEGER},
+      category_id_3 = #{record.categoryId3,jdbcType=INTEGER},
+      category_name_1 = #{record.categoryName1,jdbcType=VARCHAR},
+      category_name_2 = #{record.categoryName2,jdbcType=VARCHAR},
+      category_name_3 = #{record.categoryName3,jdbcType=VARCHAR},
+      common_id = #{record.commonId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.threefishes.cloudrepository.entity.CouponUseGoods">
+    update coupon_use_goods
+    <set>
+      <if test="activityId != null">
+        activity_id = #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId1 != null">
+        category_id_1 = #{categoryId1,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId2 != null">
+        category_id_2 = #{categoryId2,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId3 != null">
+        category_id_3 = #{categoryId3,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName1 != null">
+        category_name_1 = #{categoryName1,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName2 != null">
+        category_name_2 = #{categoryName2,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName3 != null">
+        category_name_3 = #{categoryName3,jdbcType=VARCHAR},
+      </if>
+      <if test="commonId != null">
+        common_id = #{commonId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.threefishes.cloudrepository.entity.CouponUseGoods">
+    update coupon_use_goods
+    set activity_id = #{activityId,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      category_id_1 = #{categoryId1,jdbcType=INTEGER},
+      category_id_2 = #{categoryId2,jdbcType=INTEGER},
+      category_id_3 = #{categoryId3,jdbcType=INTEGER},
+      category_name_1 = #{categoryName1,jdbcType=VARCHAR},
+      category_name_2 = #{categoryName2,jdbcType=VARCHAR},
+      category_name_3 = #{categoryName3,jdbcType=VARCHAR},
+      common_id = #{commonId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.threefishes.cloudrepository.entity.CouponUseGoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from coupon_use_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

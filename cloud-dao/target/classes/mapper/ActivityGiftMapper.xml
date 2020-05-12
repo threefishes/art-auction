@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.threefishes.cloudrepository.dao.ActivityGiftMapper">
+  <resultMap id="BaseResultMap" type="cn.threefishes.cloudrepository.entity.ActivityGift">
+    <id column="gift_id" jdbcType="INTEGER" property="giftId" />
+    <result column="gift_goods_name" jdbcType="VARCHAR" property="giftGoodsName" />
+    <result column="gift_image_name" jdbcType="VARCHAR" property="giftImageName" />
+    <result column="gift_price" jdbcType="DECIMAL" property="giftPrice" />
+    <result column="gift_state" jdbcType="INTEGER" property="giftState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    gift_id, gift_goods_name, gift_image_name, gift_price, gift_state
+  </sql>
+  <select id="selectByExample" parameterType="cn.threefishes.cloudrepository.entity.ActivityGiftExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from activity_gift
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from activity_gift
+    where gift_id = #{giftId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from activity_gift
+    where gift_id = #{giftId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.threefishes.cloudrepository.entity.ActivityGiftExample">
+    delete from activity_gift
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="gift_id" keyProperty="giftId" parameterType="cn.threefishes.cloudrepository.entity.ActivityGift" useGeneratedKeys="true">
+    insert into activity_gift (gift_goods_name, gift_image_name, gift_price, 
+      gift_state)
+    values (#{giftGoodsName,jdbcType=VARCHAR}, #{giftImageName,jdbcType=VARCHAR}, #{giftPrice,jdbcType=DECIMAL}, 
+      #{giftState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="gift_id" keyProperty="giftId" parameterType="cn.threefishes.cloudrepository.entity.ActivityGift" useGeneratedKeys="true">
+    insert into activity_gift
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="giftGoodsName != null">
+        gift_goods_name,
+      </if>
+      <if test="giftImageName != null">
+        gift_image_name,
+      </if>
+      <if test="giftPrice != null">
+        gift_price,
+      </if>
+      <if test="giftState != null">
+        gift_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="giftGoodsName != null">
+        #{giftGoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="giftImageName != null">
+        #{giftImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="giftPrice != null">
+        #{giftPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="giftState != null">
+        #{giftState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.threefishes.cloudrepository.entity.ActivityGiftExample" resultType="java.lang.Long">
+    select count(*) from activity_gift
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update activity_gift
+    <set>
+      <if test="record.giftId != null">
+        gift_id = #{record.giftId,jdbcType=INTEGER},
+      </if>
+      <if test="record.giftGoodsName != null">
+        gift_goods_name = #{record.giftGoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftImageName != null">
+        gift_image_name = #{record.giftImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftPrice != null">
+        gift_price = #{record.giftPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.giftState != null">
+        gift_state = #{record.giftState,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update activity_gift
+    set gift_id = #{record.giftId,jdbcType=INTEGER},
+      gift_goods_name = #{record.giftGoodsName,jdbcType=VARCHAR},
+      gift_image_name = #{record.giftImageName,jdbcType=VARCHAR},
+      gift_price = #{record.giftPrice,jdbcType=DECIMAL},
+      gift_state = #{record.giftState,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.threefishes.cloudrepository.entity.ActivityGift">
+    update activity_gift
+    <set>
+      <if test="giftGoodsName != null">
+        gift_goods_name = #{giftGoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="giftImageName != null">
+        gift_image_name = #{giftImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="giftPrice != null">
+        gift_price = #{giftPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="giftState != null">
+        gift_state = #{giftState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where gift_id = #{giftId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.threefishes.cloudrepository.entity.ActivityGift">
+    update activity_gift
+    set gift_goods_name = #{giftGoodsName,jdbcType=VARCHAR},
+      gift_image_name = #{giftImageName,jdbcType=VARCHAR},
+      gift_price = #{giftPrice,jdbcType=DECIMAL},
+      gift_state = #{giftState,jdbcType=INTEGER}
+    where gift_id = #{giftId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.threefishes.cloudrepository.entity.ActivityGiftExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from activity_gift
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

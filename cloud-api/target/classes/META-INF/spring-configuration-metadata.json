@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "hikari",
+      "type": "cn.threefishes.cloudapi.config.hikari.DBProperties",
+      "sourceType": "cn.threefishes.cloudapi.config.hikari.DBProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "hikari.master",
+      "type": "com.zaxxer.hikari.HikariDataSource",
+      "sourceType": "cn.threefishes.cloudapi.config.hikari.DBProperties"
+    },
+    {
+      "name": "hikari.slave",
+      "type": "com.zaxxer.hikari.HikariDataSource",
+      "sourceType": "cn.threefishes.cloudapi.config.hikari.DBProperties"
+    }
+  ],
+  "hints": []
+}

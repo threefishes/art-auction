@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.threefishes.cloudrepository.dao.FormatTemplateMapper">
+  <resultMap id="BaseResultMap" type="cn.threefishes.cloudrepository.entity.FormatTemplate">
+    <id column="format_id" jdbcType="INTEGER" property="formatId" />
+    <result column="format_name" jdbcType="VARCHAR" property="formatName" />
+    <result column="format_site" jdbcType="INTEGER" property="formatSite" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.threefishes.cloudrepository.entity.FormatTemplateWithBLOBs">
+    <result column="format_content" jdbcType="LONGVARCHAR" property="formatContent" />
+    <result column="format_mobile_content" jdbcType="LONGVARCHAR" property="formatMobileContent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    format_id, format_name, format_site, store_id
+  </sql>
+  <sql id="Blob_Column_List">
+    format_content, format_mobile_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplateExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from format_template
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from format_template
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from format_template
+    where format_id = #{formatId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from format_template
+    where format_id = #{formatId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplateExample">
+    delete from format_template
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="format_id" keyProperty="formatId" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplateWithBLOBs" useGeneratedKeys="true">
+    insert into format_template (format_name, format_site, store_id, 
+      format_content, format_mobile_content
+      )
+    values (#{formatName,jdbcType=VARCHAR}, #{formatSite,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, 
+      #{formatContent,jdbcType=LONGVARCHAR}, #{formatMobileContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="format_id" keyProperty="formatId" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplateWithBLOBs" useGeneratedKeys="true">
+    insert into format_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="formatName != null">
+        format_name,
+      </if>
+      <if test="formatSite != null">
+        format_site,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="formatContent != null">
+        format_content,
+      </if>
+      <if test="formatMobileContent != null">
+        format_mobile_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="formatName != null">
+        #{formatName,jdbcType=VARCHAR},
+      </if>
+      <if test="formatSite != null">
+        #{formatSite,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="formatContent != null">
+        #{formatContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="formatMobileContent != null">
+        #{formatMobileContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplateExample" resultType="java.lang.Long">
+    select count(*) from format_template
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update format_template
+    <set>
+      <if test="record.formatId != null">
+        format_id = #{record.formatId,jdbcType=INTEGER},
+      </if>
+      <if test="record.formatName != null">
+        format_name = #{record.formatName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formatSite != null">
+        format_site = #{record.formatSite,jdbcType=INTEGER},
+      </if>
+      <if test="record.storeId != null">
+        store_id = #{record.storeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.formatContent != null">
+        format_content = #{record.formatContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.formatMobileContent != null">
+        format_mobile_content = #{record.formatMobileContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update format_template
+    set format_id = #{record.formatId,jdbcType=INTEGER},
+      format_name = #{record.formatName,jdbcType=VARCHAR},
+      format_site = #{record.formatSite,jdbcType=INTEGER},
+      store_id = #{record.storeId,jdbcType=INTEGER},
+      format_content = #{record.formatContent,jdbcType=LONGVARCHAR},
+      format_mobile_content = #{record.formatMobileContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update format_template
+    set format_id = #{record.formatId,jdbcType=INTEGER},
+      format_name = #{record.formatName,jdbcType=VARCHAR},
+      format_site = #{record.formatSite,jdbcType=INTEGER},
+      store_id = #{record.storeId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplateWithBLOBs">
+    update format_template
+    <set>
+      <if test="formatName != null">
+        format_name = #{formatName,jdbcType=VARCHAR},
+      </if>
+      <if test="formatSite != null">
+        format_site = #{formatSite,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="formatContent != null">
+        format_content = #{formatContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="formatMobileContent != null">
+        format_mobile_content = #{formatMobileContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where format_id = #{formatId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplateWithBLOBs">
+    update format_template
+    set format_name = #{formatName,jdbcType=VARCHAR},
+      format_site = #{formatSite,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      format_content = #{formatContent,jdbcType=LONGVARCHAR},
+      format_mobile_content = #{formatMobileContent,jdbcType=LONGVARCHAR}
+    where format_id = #{formatId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplate">
+    update format_template
+    set format_name = #{formatName,jdbcType=VARCHAR},
+      format_site = #{formatSite,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER}
+    where format_id = #{formatId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithBLOBsWithRowbounds" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplateExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from format_template
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.threefishes.cloudrepository.entity.FormatTemplateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from format_template
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
