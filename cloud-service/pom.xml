@@ -29,7 +29,7 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.threefishes</groupId>
-			<artifactId>cloud-repository</artifactId>
+			<artifactId>cloud-dao</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

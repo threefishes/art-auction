@@ -21,7 +21,7 @@
     </parent>
     <modules>
         <module>cloud-common</module>
-        <module>cloud-repository</module>
+        <module>cloud-dao</module>
         <module>cloud-service</module>
         <module>cloud-api</module>
     </modules>
