@@ -1,0 +1,96 @@
+server:
+  port: 8762
+
+spring:
+  profiles:
+    active: dev
+  aop:
+    auto: true
+    proxy-target-class: true
+mapper:
+    mappers:
+        - tk.mybatis.springboot.util.MyMapper
+    not-empty: false
+    identity: MYSQL
+
+# PageHelper分页插件配置
+pagehelper:
+  #分页插件会自动检测当前的数据库链接，自动选择合适的分页方式。
+  helper-dialect: mysql
+  #分页合理化参数，默认值为false。当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。默认false 时，直接根据参数进行查询。
+  reasonable: true
+  #支持通过 Mapper 接口参数来传递分页参数，默认值false，分页插件会从查询方法的参数值中，自动根据上面 params 配置的字段中取值，查找到合适的值时就会自动分页。
+  support-methods-arguments: true
+  #为了支持startPage(Object params)方法，增加了该参数来配置参数映射，用于从对象中根据属性名取值， 可以配置 pageNum,pageSize,count,pageSizeZero,reasonable，不配置映射的用默认值， 默认值为pageNum=pageNum。
+  params: count=countSql
+
+# Swagger界面内容配置
+swagger:
+  title: API接口文档
+  description: Api Documentation
+  version: 1.0.0
+
+#快递鸟
+express:
+  EBusinessID: 1111111
+  AppKey: 2123123d-a12312a-23123b-8121239-c630123123a0c
+
+task:
+  wechat:
+    enable: true
+    red:
+      #每天早上9点定时任务发送邀请人红包
+      cron: 0 0 9 * * ?
+    #发送订单到管易云
+    order:
+      cron: 0 0 6,14,18 * * ?
+    #查询订单物流信息每6小时一次
+    shipInfo:
+      cron: 0 0 0/6 * * ?
+    #从管易云查询订单物流编号，每天一次
+    shipSn:
+      cron: 0 0 1 * * ?
+    #打卡提醒每5分钟一次，查询5分钟内所有需要提醒的人，发送提醒消息
+    remind:
+      cron: 0 0/5 * * * ?
+    #邀请人奖励/队长奖励每小时一次
+    gift:
+      cron: 0 0 0/1 * * ?
+    #同步库存每5分钟一次
+    storage:
+      cron: 0 0/5 * * * ?
+    #发送短信，每秒1次
+    message:
+       cron: 0/1 * 1 * * ?
+    #同步微信菜单，每分钟一次
+    wechatMenu:
+      cron: 0 0/1 * * * ?
+    #同步小程序图片素材到微信服务器，每天凌晨执行一次
+    wechatMini:
+      cron: 0 0 0 */1 * ?
+  card:
+    check:
+      cron : 0 55 23 * * ?
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: tk.mybatis.springboot.model
+
+#华为短信接口信息
+huaweiCloud:
+  #APP接入地址+接口访问URI
+  sendSmsUrl: https://api.rtc.huaweicloud.com:10443/sms/batchSendSms/v1
+  #APP_Key
+  appKey: 8hlsdfertwertwetrwerfJYewerwe
+  #APP_Secret
+  appSecret: werwerwerweasfsdfsfdsd
+  #验证码类短信通道号
+  codeSender: 881345345345
+  #通知类类短信通道号
+  messageSender: 3453453464564564
+  statusCallBack:
+  signature:
+
+# jedis连接池队列配置
+jedisPool:
+   queuePrefix: nc.queue.

@@ -1,0 +1,11 @@
+server:
+  port: 8861
+  #max-http-header-size: 20480
+
+spring:
+  profiles:
+    active: prod
+
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000

@@ -1,0 +1,33 @@
+server:
+  port: 8961
+  tomcat:
+    max-threads: 500
+    max-connections: 5000
+
+spring:
+  profiles:
+    active: prod
+  redispre:
+    value: "auction:cache:"
+  tokenpre:
+    value: "token:"
+
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 120000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+
+zuul:
+  semaphore:
+    max-semaphores: 2000
+  sensitive-headers:
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 600000
