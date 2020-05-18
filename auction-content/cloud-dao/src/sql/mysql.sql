@@ -3,24 +3,44 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
---  Table structure for `art_auction`
+--  Table structure for `article`
 -- ----------------------------
-DROP TABLE IF EXISTS `art_auction`;
-CREATE TABLE `art_auction` (
-	  `auction_id` int(11) NOT NULL AUTO_INCREMENT,
-	  `product_id` int(11) NOT NULL COMMENT '商品ID',
-	  `product_name` varchar(128) not null COMMENT '商品名称',
-	  `init_price` decimal(19,2) not null COMMENT '起拍价',
-	  `add_price` decimal(19,2) not null COMMENT '加价',
-	  `auction_json` longtext NOT NULL COMMENT '文字项目描述',
-	  `auction_desc` longtext NOT NULL COMMENT '文字和图片描述',
-	  `auction_state` smallint(1) DEFAULT NULL COMMENT '商品拍卖状态 0-上拍，1-下拍',
-	  `end_time` datetime DEFAULT NULL COMMENT '结束时间',
-	  `start_time` datetime DEFAULT NULL COMMENT '开始时间',
-	  `auction_type` int(11) DEFAULT NULL COMMENT '拍卖类型 0-加价拍，1-降价拍，2-一口价',
-	  `create_time` datetime DEFAULT NULL,
-	  `update_time` datetime DEFAULT NULL,
-	  PRIMARY KEY (`auction_id`)
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE `article` (
+	`article_id` int(11) NOT NULL AUTO_INCREMENT,
+	`article_type` int(11) DEFAULT NULL COMMENT '文章类型 0-普通文章，1-帮助中心，2-专题',
+	`allow_delete` int(11) DEFAULT NULL COMMENT '是否可以删除，帮助中心的文章是不能删除的',
+  	`category_id` SMALLINT NOT NULL COMMENT '文章分类',
+  	`content` longtext COMMENT COMMENT '文章内容', 
+	`sort` int(11) DEFAULT NULL COMMENT '排序 数字越小越靠前',
+    `title` varchar(30) DEFAULT NULL COMMENT '标题',
+    `url` varchar(255) DEFAULT NULL COMMENT '文章地址',
+	`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+	`update_time` datetime DEFAULT NULL COMMENT '修改时间',
+	PRIMARY KEY (`article_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
+-- ----------------------------
+--  Table structure for `article_category`
+-- ----------------------------
+DROP TABLE IF EXISTS `article_category`;
+CREATE TABLE `article_category` (
+  `category_id` SMALLINT NOT NULL AUTO_INCREMENT,
+  `position_id` int(11) DEFAULT NULL,
+  `sort` SMALLINT DEFAULT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `article_position`
+-- ----------------------------
+DROP TABLE IF EXISTS `article_position`;
+CREATE TABLE `article_position` (
+  `position_id` int(11) NOT NULL AUTO_INCREMENT,
+  `allow_add_category` int(11) DEFAULT NULL,
+  `position_title` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`position_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
